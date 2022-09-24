@@ -1,0 +1,28 @@
+{
+  "name": "fragments-ui",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Fragments UI testing web app",
+  "source": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gulyapulya/fragments-ui.git"
+  },
+  "author": "Gulnur Baimukhambetova <gbaimukhambetova@myseneca.ca>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/gulyapulya/fragments-ui/issues"
+  },
+  "homepage": "https://github.com/gulyapulya/fragments-ui#readme",
+  "devDependencies": {
+    "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "aws-amplify": "^4.3.36"
+  }
+}
