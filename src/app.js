@@ -1,13 +1,17 @@
 // src/app.js
 
 import { Auth, getUser } from './auth';
-import { getUserFragments } from './api';
+import { getUserFragments, postFragment } from './api';
+
+const dragDrop = require("drag-drop");
 
 async function init() {
   // Get our UI elements
   const userSection = document.querySelector('#user');
   const loginBtn = document.querySelector('#login');
   const logoutBtn = document.querySelector('#logout');
+  const fragmentSection = document.querySelector("#fragment");
+  const postFragmentBtn = document.querySelector("#submit-file");
 
   // Wire up event handlers to deal with login and logout.
   loginBtn.onclick = () => {
@@ -43,6 +47,37 @@ async function init() {
 
   // Disable the Login button
   loginBtn.disabled = true;
+
+  // Disable the fragment section
+  fragmentSection.hidden = false;
+
+  // File upload
+  
+  let fileData;
+
+  dragDrop("#file", (files) => {
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.addEventListener("load", (e) => {
+        const arr = new Uint8Array(e.target.result);
+        const buffer = new Buffer(arr);
+
+        fileData = { buffer, file };
+      });
+      reader.addEventListener("error", (err) => {
+        console.error("FileReader error" + err);
+      });
+      reader.readAsArrayBuffer(file);
+
+      document.getElementById("file").textContent = file.name;
+    });
+  });
+
+  // Post fragment
+  postFragmentBtn.onclick = () => {
+    console.log("Adding a new fragment: ", fileData);
+    postFragment(user, fileData);
+  };
 }
 
 // Wait for the DOM to be ready, then start the app
