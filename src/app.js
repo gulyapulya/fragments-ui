@@ -76,6 +76,7 @@ async function init() {
 
       document.getElementById("file").textContent = file.name;
       let type = file.type;
+      if (type == "" && file.name.includes(".md")) type = "text/markdown";
       document.getElementById("type").value = type;
     });
   });
@@ -92,7 +93,7 @@ async function init() {
 
   // Post or Put fragment
   postFragmentBtn.onclick = () => {
-    const id = document.getElementById("put-fragment-id").value;
+    const id = document.getElementById("put-id").value;
     if (id.length == 0) {
       postFragment(user, fileData, document.getElementById("type").value);
     } else {
