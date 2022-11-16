@@ -1,7 +1,11 @@
 // src/app.js
 
 import { Auth, getUser } from './auth';
-import { getUserFragments, postFragment } from './api';
+import { getFragments, 
+         getFragment, 
+         getFragmentInfo, 
+         postFragment, 
+         putFragment } from './api';
 
 const dragDrop = require("drag-drop");
 
@@ -12,6 +16,8 @@ async function init() {
   const logoutBtn = document.querySelector('#logout');
   const fragmentSection = document.querySelector("#fragment");
   const postFragmentBtn = document.querySelector("#submit-file");
+  const getFragmentsBtn = document.querySelector("#get-fragments");
+  const getFragmentsExpBtn = document.querySelector("#get-fragments-exp");
 
   // Wire up event handlers to deal with login and logout.
   loginBtn.onclick = () => {
@@ -37,7 +43,7 @@ async function init() {
   console.log({ user });
 
   // Do an authenticated request to the fragments API server and log the result
-  getUserFragments(user);
+  getFragments(user, true);
   
   // Update the UI to welcome the user
   userSection.hidden = false;
@@ -61,7 +67,6 @@ async function init() {
       reader.addEventListener("load", (e) => {
         const arr = new Uint8Array(e.target.result);
         const buffer = new Buffer(arr);
-
         fileData = { buffer, file };
       });
       reader.addEventListener("error", (err) => {
@@ -70,13 +75,30 @@ async function init() {
       reader.readAsArrayBuffer(file);
 
       document.getElementById("file").textContent = file.name;
+      let type = file.type;
+      document.getElementById("type").value = type;
     });
   });
 
-  // Post fragment
+  // Get all fragments
+  getFragmentsBtn.onclick = () => {
+    getFragments(user);
+  };
+
+  // Get all fragments expanded
+  getFragmentsExpBtn.onclick = () => {
+    getFragments(user, true);
+  };
+
+  // Post or Put fragment
   postFragmentBtn.onclick = () => {
-    console.log("Adding a new fragment: ", fileData);
-    postFragment(user, fileData);
+    const id = document.getElementById("put-fragment-id").value;
+    if (id.length == 0) {
+      postFragment(user, fileData, document.getElementById("type").value);
+    } else {
+      putFragment(user, id, fileData, document.getElementById("type").value);
+    }
+    
   };
 }
 

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Fragments UI</title>
     <link rel="stylesheet" href="https://unpkg.com/bamboo.css" />
+    <link rel="stylesheet" href="stylesheet.css" />
     <script type="module" src="app.js"></script>
   </head>
   <body>
@@ -14,10 +15,30 @@
     <section hidden id="user">
       <h2>Hello <span class="username" style="color:rgb(255,182,193);"></span>!</h2>
     </section>
-    <section id="fragment" hidden>
+    <section hidden id="fragment">
+      <button id="get-fragments">Get all user fragments</button>
+      <button id="get-fragments-exp">Expanded</button>
+
       <div class="create-fragment">
-        <h3>Create new fragment:</h3>
-        <div id="file">Put your .txt file here</div> </br>
+        <h3>Create new or update existing fragment</h3>
+        <p>Only any text/* or application/json are currently supported</p>
+        <div id="file">
+          ----------------------------</br>
+          Drag and drop your file here
+          </br>----------------------------
+        </div> 
+        </br>
+        <div class="grid-container">
+          <div class="grid-child">
+            <label for="put-id">Specify fragment's Id if you wish to update:</label>
+            <input type="text" id="put-id" name="put-id" size="34" />
+          </div>
+          <div class="grid-child">
+            <label for="type">Fragment's type (correct if wrong):</label>
+            <input type="text" id="type" name="type" size="27" />
+          </div>
+        </div>
+        </br>
         <button id="submit-file">Submit</button>
       </div>
     </section>
