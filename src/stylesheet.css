@@ -3,3 +3,10 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
 }
+
+table {
+    max-width: 100%;
+    overflow: scroll;
+    word-wrap: break-word;
+    table-layout: fixed;
+}

@@ -18,16 +18,18 @@
     <section hidden id="fragment">
       <button id="get-fragments">Get all user fragments</button>
       <button id="get-fragments-exp">Expanded</button>
+      <br><br>
+      <p style="color:rgb(255,182,193);">Get Fragments:</p>
+      <div id="result" style="color:rgb(255,182,193);"></div>
 
       <div class="create-fragment">
         <h3>Create new or update existing fragment</h3>
-        <p>Only any text/* or application/json are currently supported</p>
         <div id="file">
-          ----------------------------</br>
+          ----------------------------<br>
           Drag and drop your file here
-          </br>----------------------------
+         <br>----------------------------
         </div> 
-        </br>
+        <br>
         <div class="grid-container">
           <div class="grid-child">
             <label for="put-id">Specify fragment's Id if you wish to update:</label>
@@ -38,9 +40,43 @@
             <input type="text" id="type" name="type" size="27" />
           </div>
         </div>
-        </br>
+        <br>
         <button id="submit-file">Submit</button>
+        <br><br>
+        <div id="post-result" style="color:rgb(255,182,193);"></div>
       </div>
+
+      <div class="get-fragment">
+        <h3>Get or delete existing fragment</h3>
+        <div class="grid-container">
+          <div class="grid-child">
+            <label for="get-id">Specify fragment's Id:</label>
+            <input type="text" id="get-id" name="get-id" size="34" />
+          </div>
+          <div class="grid-child">
+            <label for="get-id">Specify content type if converting:</label>
+            <select name="convert-type"  id="convert-type">
+              <option value="">Do not convert</option>
+              <option value=".txt">text/plain</option>
+              <option value=".md">text/markdown</option>
+              <option value=".html">text/html</option>
+              <option value=".json">application/json</option>
+              <option value=".png">image/png</option>
+              <option value=".jpeg">image/jpeg</option>
+              <option value=".gif">image/gif</option>
+              <option value=".webp">image/webp</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <button id="get-data">Get Data</button>
+        <button id="get-meta">Get Metadata</button>
+        <button id="delete-fragment">Delete fragment</button>
+      </div>
+
+      <br>
+      <div id="data" style="color:rgb(255,182,193);"></div>
+      <img id="image" />
     </section>
   </body>
 </html>

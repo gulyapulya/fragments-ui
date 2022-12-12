@@ -5,7 +5,8 @@ import { getFragments,
          getFragment, 
          getFragmentInfo, 
          postFragment, 
-         putFragment } from './api';
+         putFragment,
+         deleteFragment } from './api';
 
 const dragDrop = require("drag-drop");
 
@@ -18,6 +19,9 @@ async function init() {
   const postFragmentBtn = document.querySelector("#submit-file");
   const getFragmentsBtn = document.querySelector("#get-fragments");
   const getFragmentsExpBtn = document.querySelector("#get-fragments-exp");
+  const deleteFragmentBtn = document.querySelector("#delete-fragment");
+  const getFragmentDataBtn = document.querySelector("#get-data");
+  const getFragmentMetaBtn = document.querySelector("#get-meta");
 
   // Wire up event handlers to deal with login and logout.
   loginBtn.onclick = () => {
@@ -99,8 +103,27 @@ async function init() {
     } else {
       putFragment(user, id, fileData, document.getElementById("type").value);
     }
-    
   };
+
+  // Delete fragment
+  deleteFragmentBtn.onclick = () => {
+    const id = document.getElementById("get-id").value;
+    deleteFragment(user, id);
+  };
+
+  // Get fragment data
+  getFragmentDataBtn.onclick = () => {
+    const id = document.getElementById("get-id").value;
+    const convertType = document.querySelector('#convert-type');
+    getFragment(user, id, convertType.value);
+  };
+
+  // Get fragment metadata
+  getFragmentMetaBtn.onclick = () => {
+    const id = document.getElementById("get-id").value;
+    getFragmentInfo(user, id);
+  };
+
 }
 
 // Wait for the DOM to be ready, then start the app
