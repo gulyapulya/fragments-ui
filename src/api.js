@@ -116,7 +116,7 @@ export async function getFragment(user, id, ext) {
     } 
     else {
       data = await res.text();
-      dataDisp.textContent = data;
+      dataDisp.innerHTML = data.replace(/\n( *)/g, function (match, p1) { return '<br>' + '&nbsp;'.repeat(p1.length);});;
     } 
 
     console.log('Successfully received fragment data', { data });
@@ -131,7 +131,7 @@ export async function getFragmentInfo(user, id) {
   const dataDisp = document.querySelector('#data');
   dataDisp.textContent = '';
   const image = document.querySelector('#image');
-  mage.src = '';
+  image.src = '';
   try {
     const res = await fetch(`${apiUrl}/v1/fragments/${id}/info`, {
       headers: user.authorizationHeaders(),
@@ -199,7 +199,7 @@ export async function deleteFragment(user, id) {
   const dataDisp = document.querySelector('#data');
   dataDisp.textContent = '';
   const image = document.querySelector('#image');
-  mage.src = '';
+  image.src = '';
   try {
     const res = await fetch(`${apiUrl}/v1/fragments/${id}`, {
       method: "DELETE",
